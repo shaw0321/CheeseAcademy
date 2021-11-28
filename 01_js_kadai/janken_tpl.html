@@ -22,22 +22,19 @@
   <div>コンピュータの出した手は？「<span id="pc_hands">なに？</span>」</div>
   <div id="judgment">勝ち</div>
 </main>
-
 <footer></footer>
 <script>
 //じゃんけん用のSCRIPTを書いてください
-
 // ボタンを押したときの処理
 $("li").on("click", function(){
   // 自分の手のバリューを取得する
-  let my_hand_point = $(this).val()
-  console.log(my_hand_point);
+  let my_hand_point = $(this).val();
+
+  // 相手の手を決める
   const pc_hand_point = Math.ceil(3*Math.random());
   const pc_hand = Array("", "グー","チョキ","パー");
-  
-
   const a = pc_hand_point - my_hand_point ;
-let judge = "";
+  let judge = "";
 
 if(a == 0){
   judge = "引き分け";
@@ -47,15 +44,8 @@ if(a == 0){
   judge = "負け";
 }
 
-console.log(judge);
-console.log(pc_hand[pc_hand_point]);
-
 $("#judgment").text(judge);
 $("#pc_hands").text(pc_hand[pc_hand_point]);
-
-
-
-
 
 });
 

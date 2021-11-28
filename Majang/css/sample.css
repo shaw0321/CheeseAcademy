@@ -1,0 +1,197 @@
+
+
+.title{
+    font-size: large;
+    font-weight: bold;
+    margin-bottom: 5px;
+
+}
+
+
+header{
+height:30px;
+background-color: #006835;
+color: white;
+
+margin-bottom: 20px;
+
+}
+
+.main{
+    width: 100%;
+}
+
+section{
+    margin-bottom: 20px;
+}
+
+
+/* .charge_area{
+    display: flex;
+} */
+
+.point_area{
+    margin-right: 20px;
+}
+
+
+.player{
+    width: 100%;
+    height:auto;
+    
+}
+
+
+.haipai{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width:96%;
+
+    /* border: 2px black solid; */
+}
+
+.haipai li{
+    width: 7%;
+    height: 90px;
+    margin-right: 1px;
+    /* border: 2px black solid; */
+}
+
+.haipai li img{
+    width: 100%;
+    height: auto;
+    
+}
+
+
+
+/* 選択時の牌 */
+.selected{
+    position: relative;
+    top:-20px;
+
+}
+    
+
+/* ボタンに関する部分 */
+.btns{
+    display: flex;
+    flex-direction: row;
+}
+
+.btn{
+    width: 20%;
+    height: 30px;
+    
+    background-color:#B81C24;
+    border-radius: 10px;
+
+
+    margin-right: 10px;
+    font-size: large;
+    font-weight: bold;
+    color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* text-align: center; */
+    
+}
+
+.btn:hover{
+    opacity: 50%;
+    cursor: pointer;
+}
+
+
+/* 課金画面 */
+
+
+.open {
+	cursor:pointer; /* マウスオーバーでカーソルの形状を変えることで、クリックできる要素だとわかりやすいように */
+}
+#pop-up {
+	display: none; /* label でコントロールするので input は非表示に */
+}
+.overlay {
+	display: none; /* input にチェックが入るまでは非表示に */
+}
+#pop-up:checked + .overlay {
+	display: block;
+	z-index: 9999;
+	background-color: #00000070;
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	top: 0;
+	left: 0;
+}
+.window {
+	width: 90vw;
+	max-width: 380px;
+	height: 240px;
+	background-color: #ffffff;
+	border-radius: 6px;
+	
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+    display: flex;
+    flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.tariff{
+    display: flex;
+    flex-direction: column;
+	
+	align-items: center;
+
+    width: 100%;
+    margin-top: 40px;
+
+}
+
+.tariff li{
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.tariff_left{
+    width: 100px;
+}
+
+.tariff_right{
+    width: 200px;
+}
+
+.text {
+	font-size: 18px;
+	margin: 0;
+}
+.close {
+	cursor:pointer;
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	font-size: 20px;
+}
+
+
+.alert{
+    color: red;
+}
+
+
+footer{
+    background-color: #006835;
+    height: 40px;
+    color: white;
+}
