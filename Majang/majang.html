@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/reset.css">
+
+<link rel="stylesheet" href="css/sample.css">
+
+<title>MIL(Majang I~~~ League)</title>
+</head>
+<body>
+
+<header>
+  <h1 class="title">MIL(Majang I~~~ League)</h1>
+  <input type="button" class="btn" id="loginpagebtn" value="log out">
+</header>
+
+<main>
+  <section class="charge_area">
+  
+    <p class="point_area title">ポイント残高: <span class="value" id="value"></span>P<span class="alert title" style ="display: none;">←課金してチャージしてね</span></p>
+    <!-- <p class = "btn"><label class="open" for="pop-up">課金</label></p> -->
+    <label class="open btn" for="pop-up">課金</label>
+  </section>
+  <section class="player">
+    <div class="player1">
+      <h1 class= "title">プレイヤー：<span id="player_name"></span>様</h1>
+      <UL class="haipai">
+        <li id=1><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+        <li id=2><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+        <li id=3><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+        <li id=4><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+        <li id=5><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+        <li id=6><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+        <li id=7><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+        <li id=8><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+        <li id=9><img src="./img/pai-images/ji6-66-90-l-emb.png" ></li>
+        <li id=10><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+        <li id=11><img src="./img/pai-images/ji6-66-90-l-emb.png" ></li>
+        <li id=12><img src="./img/pai-images/ji6-66-90-l-emb.png" ></li>
+        <li id=13 class="rightend"><img src="./img/pai-images/ji6-66-90-l-emb.png" ></li>
+        <li id=14  >
+          <img src="./img/pai-images/ji6-66-90-l-emb.png" class="selected">
+        </li>
+    </UL>
+    </div>
+  </section>
+
+ 
+  <section>
+    <!-- ボタンとかを書く領域 -->
+    <div>
+      <ul class="btns">
+        <li class="btn haipai_btn">配牌</li>
+        <li class="btn sorting_btn">理牌</li>
+        <li class="btn" id="test">テスト</li>
+
+        <!-- <li class="btn tenho">天和判定</li> -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- 課金画面に関する記述 -->
+<input type="checkbox" id="pop-up">
+<div class="overlay">
+	<div class="window">
+		<label class="close title" for="pop-up">×</label>
+		<p class="text title">料金表</p>
+    <div>
+      <ul class="tariff"> 
+        <li>
+          <p class="tariff_left">100P</p>
+          <p class ="tariff_right btn charge100" value="100">100<span>円</span></p>
+        </li>
+        <li>
+          <p class="tariff_left">1000P</p>
+          <p class ="tariff_right btn charge1000" value="1000">500<span>円</span></p>
+        </li>
+        <li>
+          <p class="tariff_left">5000P</p>
+          <p class ="tariff_right btn charge5000" value="5000">じゃんけん</p>
+        </li>
+      </ul>
+
+
+    </div>
+	</div>
+</div>
+
+<section class="backlog">
+  <p class= "title">Product Backlog</p>
+  <ul>
+    <li>完了：ログインページを実装する</li>
+    <li>完了：サインインページを実装する</li>
+    <li>完了：ログアウトボタンを実装する</li>
+    <li>完了：ログアウトボタンを押したとき、LSのkey:loginの値を空にする</li>
+    <li>完了：ログアウトボタンを押したとき、login.htmlに遷移する</li>
+
+    <li>完了：初回ログイン時にメッセージを表示する</li>
+
+    <li>完了：初回ログイン時に1000P付与する</li>
+    <li>完了：課金ボタンを押すと、課金画面が表示される</li>
+    <li>完了：課金画面で金額ボタンを押すと、当該ポイントがチャージされ、課金画面が消える</li>
+    <li>未完了：ポイント付与する時、カウントアップで金額が加算される</li>
+
+
+    <li>完了：配牌ボタンを押すと牌が表示される</li>
+    <li>完了：理牌ボタンを押したとき、自摸牌を除き牌が所定のルールに従ってソートされる</li>
+    <li>未完了：天和判定をして、天和だった場合エフェクトを表示する</li>
+    <li>完了：牌をクリックすると、選択モードになり画像がtop:-20pxになる</li>
+    <li>未完了：選択モードの牌を再度クリックすると捨牌とする</li>
+    <li>未完了：捨牌が発生した場合、再度理牌を行い、左から14番目に新しい牌を自摸する</li>
+    <li>完了：ポイント残高を表示し、ポイント残高が０未満になる場合課金アラートを出す</li>
+    <li>完了：配牌一回につき100P消費する</li>
+    <li>未完了：自摸一回につき10P消費する</li>
+    <li>未完了；じゃんけんに勝つとポイントがもらえる</li>
+    <li>未完了：デザインをどうにかする</li>
+    <li>未完了：ネーミングをどうにかする</li>
+    
+  </ul>
+</section>
+  
+</main>
+<footer class="title">MIL(Majang I~~~ League)</footer>
+
+<script>
+// 未ログイン状態でこのページに来た時、loginページに遷移させる
+if(localStorage.getItem("login") == ""){
+    alert("未ログインのため、Login画面に遷移します。");
+    window.location.href = "./login.html";
+}
+
+
+// ログアウトボタンに関する処理
+// ログアウトボタンを押すと、LSのloginの値を空にして、ログインページに遷移する
+$("#loginpagebtn").on("click", function(){
+  localStorage.setItem("login","");
+  window.location.href = "./login.html" ;
+})
+
+// ポイント表示欄に関する処理
+
+// 未ログイン状態出ないことを確認する。
+if(localStorage.getItem("login") !== ""){
+  // 初回ログインの場合、表示とポイント付与を行う
+  if(localStorage.getItem(localStorage.getItem("login") + "_point") === null){
+    alert("初回ログインボーナスで1,000P付与します")
+    localStorage.setItem(localStorage.getItem("login") + "_point", 1000);
+    display_point(0);
+
+  // 初回ログインでない場合、LSに保存されているポイント数を表示する
+  }else{
+    display_point(0);
+  }{
+
+}}
+
+
+//  プレイヤー名に関する処理
+$("#player_name").html(localStorage.getItem("login").substr(3,));
+
+
+
+ // 残高確認をして、残高が引く数より少ないときtrue,多いときfalseを返す関数
+ function isShort(point_to_substract){
+    let value = Number(localStorage.getItem(localStorage.getItem("login") + "_point"));
+    if(point_to_substract > value){
+      return true;
+    }else{
+      return false;
+    }
+  }
+
+  // 残高確認を行う関数
+  function checkAccount(amount){
+    if(isShort(amount)){
+      // 残高不足の時の処理を書く
+      $(".alert").show();
+    }else{
+      // 残高が十分な時の処理を書く
+      display_point(amount);
+    };
+  }
+
+    // ポイント数を減算して、減算後の数字を表示する関数
+    function display_point(point_to_substract){
+    let value = Number(localStorage.getItem(localStorage.getItem("login") + "_point"));
+    localStorage.setItem(localStorage.getItem("login") + "_point",value - point_to_substract);
+    $("#value").html(Number(localStorage.getItem(localStorage.getItem("login") + "_point")));
+  }
+
+
+
+
+// 牌に関する処理
+  const hai = [0,"man1","man2","man3","man4","man5","man6","man7","man8","man9","pin1","pin2","pin3","pin4","pin5","pin6","pin7","pin8","pin9","sou1","sou2","sou3","sou4","sou5","sou6","sou7","sou8","sou9","ji1","ji2","ji3","ji4","ji5","ji6","ji7"];
+ 
+  // 配牌と自摸の消費ポイント
+  const haipai_point = 100;
+  const tsumo_point = 100;
+
+
+  // haipai配列の初期化
+  let haipai =[];
+
+  // 自摸の処理を記述する関数 n=自摸牌数
+function TSUMO(haipai,yama, length, buttom,n){
+  for(let i =0; i < n; ){
+      let hai_num = Math.ceil(length*Math.random()+buttom) ;
+      if(yama[hai_num] > 0){
+        haipai.push(hai_num);
+        yama[hai_num] = yama[hai_num] - 1;
+        i++;
+      };
+     };
+  // yamaをLSに保存する。
+  SAVE_YAMA(yama);
+
+  // haipai配列を返す；
+  return haipai;
+}
+
+
+  // 配牌のインデックスを選択する関数
+  function HAIPAI(haipai, yama, length, buttom){
+    // 配牌を初期化
+     haipai =[];
+
+    // buttomから length分の範囲の牌をランダムでhaipaiに格納する
+    TSUMO(haipai,yama,length,buttom,14);
+    return haipai;
+    };
+
+    
+  // 配牌インデックスを並び変える関数
+  function compareFunc(a, b) {
+  return a - b;
+  };
+
+  // 配牌を表示する関数 start=表示する牌の始点、end=表示する牌の終点
+  function DISPLAY(player_number,haipai,start,end){
+    for(let j =start; j <= end; j++){
+      $(".player" + player_number).find("#" + j).children('img').attr("src", "./img/pai-images/" +hai[haipai[j-1]] + "-66-90-l-emb.png");
+    };
+    // for(let j =1; j <= 14;j++){
+    //     // console.log();
+    //   $(".player" + number).find("#" + j).children('img').fadeIn(j*100);
+    // };
+
+  }
+
+// yamaをLSに保存する時の処理を書く
+function SAVE_YAMA(yama){
+    if (window.localStorage) {
+    let json = JSON.stringify(yama, undefined, 1);
+    localStorage.setItem(localStorage.getItem("login") + "_yama", json);
+  };
+}
+// yamaをLSから読みだす時の処理を書く
+function LOAD_YAMA(){
+  if (window.localStorage) {
+    let json = localStorage.getItem(localStorage.getItem("login") + "_yama");
+    let yama_str = JSON.parse(json);
+    let yama_num = yama_str.map(function (e) {
+    return Number(e);
+    });
+   
+  return yama_num
+
+
+  }
+}
+
+
+// 理牌の処理を書く
+function SORT(haipai){
+  //  理牌ボタンを押したときにhaipaiの1~13までをソートする、14番目は残す
+  var newArray =  haipai.slice(0,13);
+    var fourteenth = haipai.slice(13,14);
+    newArray.sort(compareFunc)
+    haipai = newArray.concat(fourteenth);
+    return haipai;
+}
+
+
+
+// $("#test").on("click", function(){
+//   var array = [];
+//   SAVE_YAMA(array);
+// })
+
+
+
+
+
+  //配牌ボタンを押したときの処理を記述する
+  $('.haipai_btn').on("click",function(){
+    // 残ポイント数がhaipai_pointより少ない時の処理を書く
+    //残高不足案内を出す  
+    if(isShort(haipai_point)){
+      $(".alert").show();
+      
+    // 残ポイント数が十分な時の処理を書く
+    }else{
+      // 配牌ボタンを押すたびに山を元に戻す
+      let yama= [0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4];
+
+      // 未ソートのhaipai配列を作成する
+      haipai = HAIPAI(haipai, yama, 34, 0);  
+
+      // haipai配列に対応した牌画像を画面に表示する
+      DISPLAY(1,haipai,1,14);
+
+      // 残ポイント数からhaipai_pointをマイナスする
+      display_point(haipai_point);
+    };
+    
+  });
+
+
+// 理牌ボタンを押した時の処理を記述する
+$('.sorting_btn').on("click",function(){
+    
+    haipai = SORT(haipai);
+ 
+    DISPLAY(1,haipai,1,14);
+    
+  });
+
+
+
+
+
+// 牌をクリックした時の処理を記載する
+$('img').on("click",function(){
+
+  // 選択済みの牌をクリックした時の処理
+  if($(this).hasClass("selected")) {
+
+    // 選択した牌に対応するhaipaiのkeyを選択
+    var number = Number($(this).parent().attr("id")) - 1;
+
+    //haipaiからnumberに位置する値を削除
+    haipai.splice(Number($(this).parent().attr("id")) - 1 ,1);
+
+
+    //選択した牌のselectedクラスを削除
+    $(this).removeClass("selected");
+
+    // LSからyama配列を取得する
+    let yama =LOAD_YAMA(); 
+
+    // 14番目の牌を自摸する
+    TSUMO(haipai,yama,34,0,1);
+
+    // 理牌する
+    haipai = SORT(haipai);
+
+    // 1~14番目の牌画像を更新
+    DISPLAY(1,haipai,1,14);
+
+    // 14番目の画像にselectedクラスを付与
+    $(".player" + 1).find("#14").children('img').attr("class", "selected");
+
+
+  // 未選択の牌をクリックした時の処理
+  }else{
+
+    // 選択中の牌を未選択にし、選択した牌を選択中にする。
+    $(".selected").removeClass("selected");
+    $(this).attr("class", "selected");
+    
+  }
+
+  });
+
+
+
+
+
+
+
+
+// 課金処理
+$('.charge100').on("click",function(){
+   let add_point = 100;
+  
+  // 残ポイントにadd_pointを加算する
+  display_point(-add_point);
+  
+  // アラートをけす
+  $(".alert").hide();
+    });
+
+$('.charge1000').on("click",function(){
+   let add_point = 1000;
+  
+  // 残ポイントにadd_pointを加算する
+  display_point(-add_point);
+
+  // アラートをけす
+  $(".alert").hide();    
+    });
+
+$('.charge5000').on("click",function(){
+
+  alert("未実装です");
+    });    
+  
+</script>
+</body>
+</html>

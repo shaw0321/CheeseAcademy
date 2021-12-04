@@ -17,25 +17,19 @@
 </header>
 
 <main>
-type="button" class="btn" id="loginbtn" value="login">
+<p>サインインしました、以下のボタンからログインしてください</p>
+<input type="button" class="btn" id="loginpagebtn" value="loginページへもどる">
+
 
 </main>
 <footer class="title">MIL(Majang I~~~ League)</footer>
 
 <script>
-// 未ログインの場合の処理を書く
-if(localStorage.getItem("login") == ""){
-    // ログインページに飛ばす
-    alert("未ログインのため、Login画面に遷移します。");
+//ログインページボタンを押した時の処理を記載する
+// ログインページに遷移する
+$("#loginpagebtn").on("click", function(){
     window.location.href = "./login.html";
-
-// ログイン中の場合の処理を書く
-}else{
-    alert("ログイン中のため、ゲーム画面に遷移します。");
-    window.location.href = "./majang.html";
-};
-
-
+})
 
 </script>
 </body>

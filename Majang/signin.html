@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/reset.css">
+
+<link rel="stylesheet" href="css/sample.css">
+
+<title>MIL(Majang I~~~ League)</title>
+</head>
+<body>
+
+<header>
+  <h1 class="title">MIL(Majang I~~~ League)</h1>
+</header>
+
+<main>
+
+<ul class="input_forms">
+    <li class="input_form">
+        <label for="idname" class="label">ID:</label>
+        <input type="text" id="idname" class="textbox">
+    </li>
+
+    <li class="input_form">
+        <label for="pw" class="label">パスワード:</label>
+        <input type="text" id="pw" class="textbox">
+    </li>
+
+    <li class="input_form">
+        <label for="pw_confirm" class="label">パスワード確認:</label>
+        <input type="text" id="pw_confirm" class="textbox">
+    </li>
+</ul>
+
+<div class="btns">
+    <input type="button" class="btn" id="signinbtn" value="サインイン">
+    <input type="button" class="btn" id="loginpagebtn" value="ログインページへもどる">
+    <input type="button" class="btn" id="test" value="test">
+</div>
+
+
+</main>
+<footer class="title">MIL(Majang I~~~ League)</footer>
+
+<script>
+// サインインボタンを押したときの挙動を記載する
+$("#signinbtn").on("click", function(){
+    // 少なくとも一つの欄が空欄の場合、空欄の欄がありますと返す
+    if($("#idname").val() == "" || $("#pw_confirm").val() =="" || $("#idname").val() == "" ){
+        alert("入力されていない項目があります。")
+
+    // pwのvalueとpw_againのvalueの値が一致しない場合、
+    // パスワード欄とパスワード確認欄の値が異なりますと表示する。
+    }else if($("#pw").val() !== $("#pw_confirm").val()){
+        alert("パスワード欄とパスワード確認欄の値が異なります");
+        console.log($("#pw").val());
+        console.log($("#pw_confirm").val());
+
+    // 入力したidnameが存在する場合、「存在するIDです」と返す
+    }else if(localStorage.getItem("id_" + String($("#idname").val()))){
+        alert("存在するIDです、ログインページからログインしてください");
+        console.log(localStorage.getItem("id_" + String($("#idname").val())));
+
+    // 入力したidnameが存在しない場合、「登録します」と返す
+
+    }else{
+        alert("登録します");
+        localStorage.setItem("id_" +$("#idname").val(),$("#pw").val() );
+        window.location.href = "./signincomp.html";
+       
+    }
+
+
+
+})
+
+//ログインページボタンを押した時の処理を記載する
+// ログインページに遷移する
+$("#loginpagebtn").on("click", function(){
+    window.location.href = "./login.html";
+})
+
+$("#test").on("click", function(){
+    // console.log(localStorage.getItem("id_1"));
+    if(localStorage.getItem("id_" + String($("#idname").val()))){
+    console.log("存在するIDです");
+    }else{
+    console.log("存在しないIDです");
+
+    }
+})
+
+
+
+
+</script>
+</body>
+</html>

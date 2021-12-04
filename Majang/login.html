@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/reset.css">
+
+<link rel="stylesheet" href="css/sample.css">
+
+<title>MIL(Majang I~~~ League)</title>
+</head>
+<body>
+
+<header>
+  <h1 class="title">MIL(Majang I~~~ League)</h1>
+</header>
+
+<main>
+
+<ul class="input_forms">
+    <li class="input_form">
+    <label for="idname" class="label" >ID:</label>
+    <input type="text" id="idname" class="textbox"> 
+
+    </li>
+    <li class="input_form">
+    <label for="pw" class="label" >パスワード:</label>
+    <input type="text" id="pw" class="textbox">
+    </li>
+    
+    
+</ul>
+  
+<div class="btns">
+    <input type="button" class="btn" id="loginbtn" value="ログイン">
+    <input type="button" class="btn" id="signinpagebtn" value="サインインページへ">
+</div>
+
+</main>
+<footer class="title">MIL(Majang I~~~ League)</footer>
+
+<script>
+
+// login中にこのページに遷移したとき,majang.htmlに遷移する
+if(localStorage.getItem("login") !== ""){
+    alert("ログイン中のため、ゲーム画面に遷移します。");
+    window.location.href = "./majang.html";
+}
+
+
+// loginボタンを押したときにlocal storageに当該ID,PWの組み合わせがあるか確認する
+$("#loginbtn").on("click", function(){
+    // 当該IDが存在しない場合、「存在しないIDですと返す」
+    if(localStorage.getItem("id_" + String($("#idname").val())) === null){
+        alert("存在しないIDです");
+        console.log("id_" +String($("#idname").val()));
+    }
+    // 当該IDが存在するがPWが間違っている場合、「PWが間違っています」と返す
+    else if(localStorage.getItem("id_" + String($("#idname").val())) !== $("#pw").val() ){
+        alert("PWが間違っています。");
+        console.log(localStorage.getItem("id_" + String($("#idname").val())));
+        console.log($("#pw").val());
+        
+    }
+     // 当該IDが存在してPWもあっている場合、「ログインします」と返す
+    else{
+        alert("ログインします。");
+        // login中のid名をLSに保存する
+        localStorage.setItem("login", "id_" + String($("#idname").val()));
+    window.location.href = "./majang.html";
+
+    };
+})
+
+// サインインページボタンを押したとき、signin.htmlへ遷移する
+$("#signinpagebtn").on("click", function(){
+    window.location.href = "./signin.html";
+})
+
+
+</script>
+</body>
+</html>
