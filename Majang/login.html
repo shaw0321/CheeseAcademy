@@ -43,7 +43,7 @@
 <script>
 
 // login中にこのページに遷移したとき,majang.htmlに遷移する
-if(localStorage.getItem("login") !== ""){
+if(localStorage.getItem("login") ){
     alert("ログイン中のため、ゲーム画面に遷移します。");
     window.location.href = "./majang.html";
 }

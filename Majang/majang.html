@@ -199,7 +199,7 @@ $("#player_name").html(localStorage.getItem("login").substr(3,));
  
   // 配牌と自摸の消費ポイント
   const haipai_point = 100;
-  const tsumo_point = 100;
+  const tsumo_point = 10;
 
 
   // haipai配列の初期化
@@ -336,34 +336,48 @@ $('.sorting_btn').on("click",function(){
 // 牌をクリックした時の処理を記載する
 $('img').on("click",function(){
 
+
+
   // 選択済みの牌をクリックした時の処理
   if($(this).hasClass("selected")) {
 
-    // 選択した牌に対応するhaipaiのkeyを選択
-    var number = Number($(this).parent().attr("id")) - 1;
+    // 残ポイント数がhaipai_pointより少ない時の処理を書く
+    if(isShort(haipai_point)){
 
-    //haipaiからnumberに位置する値を削除
-    haipai.splice(Number($(this).parent().attr("id")) - 1 ,1);
+       //残高不足案内を出す  
+       $(".alert").show();
+      
+    // 残ポイント数が十分な時の処理を書く
+    }else{
+
+      // 選択した牌に対応するhaipaiのkeyを選択
+      var number = Number($(this).parent().attr("id")) - 1;
+
+      //haipaiからnumberに位置する値を削除
+      haipai.splice(Number($(this).parent().attr("id")) - 1 ,1);
 
 
-    //選択した牌のselectedクラスを削除
-    $(this).removeClass("selected");
+      //選択した牌のselectedクラスを削除
+      $(this).removeClass("selected");
 
-    // LSからyama配列を取得する
-    let yama =LOAD_YAMA(); 
+      // LSからyama配列を取得する
+      let yama =LOAD_YAMA(); 
 
-    // 14番目の牌を自摸する
-    TSUMO(haipai,yama,34,0,1);
+      // 14番目の牌を自摸する
+      TSUMO(haipai,yama,34,0,1);
 
-    // 理牌する
-    haipai = SORT(haipai);
+      // 理牌する
+      haipai = SORT(haipai);
 
-    // 1~14番目の牌画像を更新
-    DISPLAY(1,haipai,1,14);
+      // 1~14番目の牌画像を更新
+      DISPLAY(1,haipai,1,14);
 
-    // 14番目の画像にselectedクラスを付与
-    $(".player" + 1).find("#14").children('img').attr("class", "selected");
+      // 14番目の画像にselectedクラスを付与
+      $(".player" + 1).find("#14").children('img').attr("class", "selected");
 
+      // 残ポイント数からtsumo_pointをマイナスする
+      display_point(tsumo_point);
+    };
 
   // 未選択の牌をクリックした時の処理
   }else{
