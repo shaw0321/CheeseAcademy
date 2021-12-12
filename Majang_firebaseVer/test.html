@@ -1,0 +1,351 @@
+<!-- <!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>麻雀</title>
+</head>
+<body>
+
+<header>
+  <h1>麻雀</h1>
+</header>
+
+<main>
+  <section>結果を書く領域</section>
+  <section class="player1">
+    <h1>player1</h1>
+    <UL class="haipai">
+      <li id=1><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=2><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=3><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=4><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=5><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=6><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=7><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=8><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=9><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=10><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=11><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=12><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=13><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=14><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+    </UL>
+  </section>
+  <section class="player2">
+    <h1>player2</h1>
+    <UL class="haipai">
+      <li id=1><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=2><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=3><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=4><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=5><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=6><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=7><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=8><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=9><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=10><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=11><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=12><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=13><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=14><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+    </UL>
+  </section>
+  <section class="player3">
+    <h1>player3</h1>
+    <UL class="haipai">
+      <li id=1><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=2><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=3><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=4><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=5><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=6><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=7><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=8><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=9><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=10><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=11><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=12><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=13><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=14><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+    </UL>
+  </section>
+  <section class="player4">
+    <h1>player4</h1>
+    <UL class="haipai">
+      <li id=1><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=2><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=3><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=4><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=5><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=6><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=7><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=8><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=9><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=10><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=11><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=12><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=13><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+      <li id=14><img src="./img/pai-images/ji6-66-90-l-emb.png"></li>
+    </UL>
+  </section>
+ 
+  <section>ボタンとかを書く領域</section>
+  <div>
+    <ul class="btns">
+      <li class="haipai_btn">配牌</li>
+      <li>理牌</li>
+      <li>天和判定</li>
+    </ul>
+  </div>
+  
+</main>
+<footer>麻雀愛好会</footer>
+
+<footer></footer>
+<script>
+  const hai = [0,"man1","man2","man3","man4","man5","man6","man7","man8","man9","pin1","pin2","pin3","pin4","pin5","pin6","pin7","pin8","pin9","sou1","sou2","sou3","sou4","sou5","sou6","sou7","sou8","sou9","ji1","ji2","ji3","ji4","ji5","ji6","ji7"];
+
+
+
+  // 配牌のインデックスを選択する関数
+  function HAIPAI(Array, yama, width, buttom){
+    for(let i =0; i < 14; ){
+      let hai_num = Math.ceil(width*Math.random()+buttom) ;
+      if(yama[hai_num] > 0){
+        Array.push(hai_num);
+        yama[hai_num] = yama[hai_num] - 1;
+        console.log(yama);
+        i++;
+      };
+     };
+     return Array;
+    };
+
+    
+  // 配牌インデックスを並び変える関数
+  function compareFunc(a, b) {
+  return a - b;
+  };
+
+  // 配牌を表示する関する
+  function DISPLAY(number,Array){
+    for(let j =1; j <= 14; j++){
+      $(".player" + number).find("#" + j).children('img').attr("src", "./img/pai-images/" +hai[Array[j-1]] + "-66-90-l-emb.png");
+    };
+
+  }
+
+  //配牌ボタンが押された時 
+  $('.haipai_btn').on("click",function(){
+    // 山をリセット
+   let yama= [0,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4];
+
+    for(n = 1; n<= 4; n++){
+    let haipai =[];
+    HAIPAI(haipai, yama, 34, 0);  
+    let order_haipai= haipai.sort(compareFunc);
+    DISPLAY(n,order_haipai);
+
+    };
+    
+
+    
+    // for(let j =1; j <= 14; j++){
+    //   $(".player2").find("#" + j).children('img').attr("src", "./img/pai-images/" +hai[order_haipai2[j-1]] + "-66-90-l-emb.png");
+    // };
+  });
+  
+</script>
+</body>
+</html> -->
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+
+
+<link rel="stylesheet" href="css/reset.css">
+
+<link rel="stylesheet" href="css/sample.css">
+
+<title>MIL(Majang I~~~ League)</title>
+</head>
+<body>
+
+<header>
+  <h1 class="title">MIL(Majang I~~~ League)</h1>
+</header>
+
+<!-- <main>
+
+<ul class="input_forms">
+    <li class="input_form">
+        <label for="idname" class="label">ID:</label>
+        <input type="text" id="idname" class="textbox">
+    </li>
+
+    <li class="input_form">
+        <label for="pw" class="label">パスワード:</label>
+        <input type="text" id="pw" class="textbox">
+    </li>
+
+    <li class="input_form">
+        <label for="pw_confirm" class="label">パスワード確認:</label>
+        <input type="text" id="pw_confirm" class="textbox">
+    </li>
+</ul>
+
+<div class="btns">
+    <input type="button" class="btn" id="signinbtn" value="サインイン">
+    <input type="button" class="btn" id="loginpagebtn" value="ログインページへもどる">
+    <input type="button" class="btn" id="test" value="test">
+</div>
+
+
+</main> -->
+<footer class="title">MIL(Majang I~~~ League)</footer>
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+    
+        import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved, onValue }
+            from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.0/firebase-database.min.js";
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyAI3GUfkngW-pUkYydXpXqEgYs3MqxW__Q",
+          authDomain: "gsapp-cb6e9.firebaseapp.com",
+          projectId: "gsapp-cb6e9",
+          storageBucket: "gsapp-cb6e9.appspot.com",
+          messagingSenderId: "208815022139",
+          appId: "1:208815022139:web:9cc201aadcca3c8ceffc1e"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+    
+       //ログインページボタンを押した時の処理を記載する
+// ログインページに遷移する
+$("#loginpagebtn").on("click", function(){
+    window.location.href = "./login.html";
+})
+
+$("#test").on("click", function(){
+    // console.log(localStorage.getItem("id_1"));
+    if(localStorage.getItem("id_" + String($("#idname").val()))){
+    console.log("存在するIDです");
+    }else{
+    console.log("存在しないIDです");
+
+    }
+})
+
+
+
+// firebaseサインインテスト
+// サインインボタンを押したときの挙動を記載する
+$("#signinbtn").on("click", function(){
+    // 少なくとも一つの欄が空欄の場合、空欄の欄がありますと返す
+    if($("#idname").val() == "" || $("#pw_confirm").val() =="" || $("#idname").val() == "" ){
+        alert("入力されていない項目があります。")
+
+    // pwのvalueとpw_againのvalueの値が一致しない場合、
+    // パスワード欄とパスワード確認欄の値が異なりますと表示する。
+    }else if($("#pw").val() !== $("#pw_confirm").val()){
+        alert("パスワード欄とパスワード確認欄の値が異なります");
+        console.log($("#pw").val());
+        console.log($("#pw_confirm").val());
+
+    // 入力したidnameが存在する場合、「存在するIDです」と返す
+    } else {
+        onValue(ref(db, "user"), function(data){
+            labelA:
+            for(var i=0; i<1;i++){
+                for (var key in data.val()){
+                    // 既に同じIDが存在していた時
+                    if(data.val()[key]["username"] == "id_" +$("#idname").val() ){ 
+                        console.log(data.val()[key]["username"]);
+                        alert("存在するIDです、ログインページからログインしてください");
+                        break labelA;
+                    }
+                    console.log(data.val()[key]["username"]);
+                    console.log("なかったね");
+
+
+                }
+                // 同じIDが存在して居なかったとき、登録する
+                alert("登録します");
+        
+                const profile= {
+                    username: "id_" +$("#idname").val(),
+                    password: $("#pw").val() 
+                };
+
+                console.log(profile);
+
+                // firebaesに登録する
+
+                const dbRef_user = ref(db, "user");
+                const newPostRef = push(dbRef_user);
+                set(newPostRef, profile);
+                window.location.href = "./signincomp.html";
+
+                
+            }       
+
+        })
+    }
+})
+
+let please ={}
+
+// async function readData(){
+//   let data = await  onValue(ref(db, "user"),function(data){
+//                     console.log(data);
+//                     console.log(data.val());
+
+                      
+//                       please = data.val();
+//                     console.log(please);
+
+//                     });
+//                     console.log(please);
+
+// }
+
+// readData();
+
+//  onValue(ref(db, "user"),function(data){
+// console.log(data);
+// console.log(data.val());
+
+  
+//   please = data.val();
+// console.log(please);
+
+// });
+// console.log(please);
+
+
+</script>
+</body>
+</html>

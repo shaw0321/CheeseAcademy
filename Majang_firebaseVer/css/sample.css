@@ -6,7 +6,10 @@
     margin-bottom: 5px;
 
 }
-
+/* 
+html{
+    display: flex;
+} */
 
 header{
 height:30px;
@@ -20,6 +23,8 @@ margin-bottom: 20px;
 
 .main{
     width: 100%;
+    height: auto;
+    margin-bottom: 10px;
 }
 
 section{
@@ -57,7 +62,7 @@ section{
 
 .haipai li{
     width: 7%;
-    height: 90px;
+    height: auto;
     margin-right: 1px;
     /* border: 2px black solid; */
 }
@@ -225,45 +230,79 @@ footer{
 
 
 
+
+
+
+
+
 /* <!--** 以下chat機能 **--> */
-
-
 
 /* .template{
     margin-bottom: 5px;
     border-bottom: 1px gray solid;
 } */
 
+
+
+
 .chatArea{
     width: 100%;
     max-width: 1000px;
     max-height:300px;
-    overflow: auto;
-    border: 1px black solid;
+
+    /* border: 1px black solid; */
+    margin-right: auto;
+    margin-left: auto;
 }
 
-#output{
+.inputArea{
+    margin-left: auto;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.inputArea .label{
+    width: 70px;
+}
+
+.inputArea .input{
+    min-width: 100px;
+    width: 50%;
+    max-width: 700px;
+    overflow-x: auto;
+
+    
+}
+
+
+/* #output{
     height:300px;
     overflow:auto;
-}
+} */
 
 .chatRows{
     width:100%;
     display: flex;
     flex-direction: column;
+    border: 1px black solid;
+    overflow-y: scroll;
+    max-height: 300px;
+
 }
+
 
 .chatRows li{
     margin-top: 10px;
-    border-bottom: 1px grey solid;
-
+    /* border-bottom: 1px grey solid; */
+    width: 100%;
 }
 
 
 
 /* 他人のチャットの時 */
 .chatRow.others {
-    width: 70%;
     display: flex;
 }
 
@@ -283,6 +322,7 @@ footer{
     display: flex;
     flex-direction: column;
     flex: 0.7 1 100px;
+    max-width: 70%;
 }
 
 .others .nameArea{
@@ -292,10 +332,13 @@ footer{
 .others .messageArea{
     font-size: medium;
     padding: 4px;
-    border: 1px grey solid;
+    border: 3px grey solid;
     border-radius: 4px;
-    overflow-wrap: normal;
+    overflow-wrap:break-word;
 }
+
+
+
 
 .others .dateArea{
     display: flex;
@@ -304,7 +347,7 @@ footer{
     color: grey;
     justify-content: end; 
     
-    flex: 0 0  100px;
+    flex: 0 0  60px;
     
 }
 
@@ -326,10 +369,10 @@ footer{
 
 /* 自分のチャット時 */
 .chatRow.myself {
-    width: 70%;
+    /* width: 70%; */
     display: flex;
     flex-direction: row-reverse;
-    justify-content: flex-end;
+    justify-content: flex-start;
 
 }
 
@@ -352,21 +395,24 @@ footer{
     display: flex;
     flex-direction: column;
     flex: 0.7 1 auto ;
+    max-width: 70%;
+
 
 }
 
 .myself .nameArea{
     font-size: small;
-    display: hidden;
+    display: flex;
+    justify-content: flex-end;
 
 }
 
 .myself .messageArea{
     font-size: medium;
     padding: 4px;
-    border: 1px grey solid;
+    border: 3px grey solid;
     border-radius: 4px;
-    overflow-wrap: normal;
+    overflow-wrap: break-word;
 }
 
 .myself .dateArea{
@@ -375,7 +421,7 @@ footer{
     font-size: 3px;
     color: grey;
     justify-content: end;  
-    flex: 0 0  100px;
+    flex: 0 0  60px;
 
 }
 
@@ -383,6 +429,7 @@ footer{
     display: flex;
     flex-direction: column;
     justify-content: end;  
+
     flex: 0 0  40px;
 
 }

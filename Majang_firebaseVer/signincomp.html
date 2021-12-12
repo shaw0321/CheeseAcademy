@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/reset.css">
+
+<link rel="stylesheet" href="css/sample.css">
+
+<title>MIL(Majang I~~~ League)</title>
+</head>
+<body>
+
+<header>
+  <h1 class="title">MIL(Majang I~~~ League)</h1>
+</header>
+
+<main>
+<p>サインインしました、以下のボタンからログインしてください</p>
+<input type="button" class="btn" id="loginpagebtn" value="loginページへもどる">
+
+
+</main>
+<footer class="title">MIL(Majang I~~~ League)</footer>
+
+<script>
+//ログインページボタンを押した時の処理を記載する
+// ログインページに遷移する
+$("#loginpagebtn").on("click", function(){
+    window.location.href = "./login.html";
+})
+
+</script>
+</body>
+</html>

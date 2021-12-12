@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/reset.css">
+
+<link rel="stylesheet" href="css/sample.css">
+
+<title>Chat</title>
+</head>
+<body>
+
+<header>
+  <h1 class="title">MIL(Majang I~~~ League)</h1>
+</header>
+
+<main>
+
+<!--/ コンテンツ表示画面 -->
+
+<div>
+    <div>
+        名前：<input type="text" id="uname">
+    </div>
+    <div>
+        <textarea name="" id="text" cols="30" rows="10"></textarea>
+        <button id="send">送信</button>
+    </div>
+
+    <section class="chatArea">
+        <UL  class="chatRows">
+            <li class="chatRow ${isMyself}" value="${key}">
+                <div class="iconArea">
+                    <span class="icon">写真</span>
+                </div>
+                <div class="contentArea">
+                    <div class="nameArea">
+                        ${msg.uname}
+                    </div>
+                    <div class="messageArea">
+                        ${msg.text}
+                    </div>
+                </div>
+                <div class="dateArea">
+                    <dv class="year_month_day">
+                        ${msg.year}/${msg.month}/${msg.day}
+                    </dv>
+                    <dv class= "hour_minute">
+                        ${msg.hour}:${msg.minute}
+                    </dv>
+                </div>
+
+                <div class="deleteArea">
+                    <button id="delete" class= ${key}>削除</button>
+                </div>
+            </li>
+            <li class="messageRow" id="myself">
+                 <div class="chatRow" id="others">
+
+                    <div class="contentArea">
+                        <div class="nameArea">
+                            池辺
+                        </div>
+                        <div class="messageArea">
+                            お早う
+                        </div>
+                    </div>
+                    <div class="date">
+                        2021/12/11
+                    </div>
+                </div>
+            </li>
+        </UL>
+    </section>
+
+    <!-- chat表示エリア -->
+
+
+    <section class="chatArea">
+        <UL  class="chatRows" id="output">
+
+        </UL>
+    </section>
+</div>
+
+
+</main>
+<footer class="title">MIL(Majang I~~~ League)</footer>
+
+
+// <!--** 以下Firebase **-->
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+        from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.0/firebase-database.min.js";
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAI3GUfkngW-pUkYydXpXqEgYs3MqxW__Q",
+      authDomain: "gsapp-cb6e9.firebaseapp.com",
+      projectId: "gsapp-cb6e9",
+      storageBucket: "gsapp-cb6e9.appspot.com",
+      messagingSenderId: "208815022139",
+      appId: "1:208815022139:web:9cc201aadcca3c8ceffc1e"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    // console.log(app);
+
+    const db = getDatabase(app);
+    // console.log(db);
+
+    const dbRef = ref(db, "chat")
+
+
+    // ユーザーネーム設定
+    const username = "池辺"
+    localStorage.setItem("name", username);
+    
+
+    // textボックスでエンターキーを押したときの処理
+    $("#text").on("keydown",function(e){
+        if ( e.which == 13 ) {
+		// ここに処理を記述
+        // console.log($("#text").val());
+        const uname =$("#uname").val();
+        const text =$("#text").val();
+
+        let date = new Date();
+        const year =  date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const hour = date.getHours();
+        const minute = date.getMinutes();
+
+        const msg = {
+            uname: uname,
+            text: text,
+            year: year,
+            month: month,
+            day: day,
+            hour: hour,
+            minute: minute
+
+        }
+        // console.log(uname);
+        // const newPostRef = dbRef.push();
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
+		return false;
+        }
+	})
+
+
+    //chatRowを生成する関数
+    function creatChatRow(data, a){
+        const msg =data.val();
+        // オブジェクトのkeyを取得
+        const key = data.key;
+
+        let isMyself =  a;
+        console.log(a);
+
+        console.log(isMyself);
+
+        let h =
+            `<li class="chatRow ${isMyself}" value="${key}">
+                <div class="iconArea">
+                    <span class="icon">写真</span>
+                </div>
+                <div class="contentArea">
+                    <div class="nameArea">
+                        ${msg.uname}
+                    </div>
+                    <div class="messageArea">
+                        ${msg.text}
+                    </div>
+                </div>
+                <div class="dateArea">
+                    <dv class="year_month_day">
+                        ${msg.year}/${msg.month}/${msg.day}
+                    </dv>
+                    <dv class= "hour_minute">
+                        ${msg.hour}:${msg.minute}
+                    </dv>
+                </div>
+
+                <div class="deleteArea">
+                    <button id="delete" class= ${key}>削除</button>
+                </div>
+            </li>`;
+
+            console.log(isMyself);
+
+        $("#output").append(h);
+    } 
+
+
+
+    // データ受信機能の実装
+    onChildAdded(dbRef, function(data){
+
+        // unameが自分だった時の処理
+        if(data.val().uname == username){
+
+            creatChatRow(data, "myself");
+
+        // unameが他人だった時の処理
+        }else{
+            creatChatRow(data, "others");
+            
+
+        }
+
+        // console.log(h);
+        
+    })
+
+
+    //   // データ受信機能の実装(削除時)
+    //   onChildRemoved(dbRef, function(data){
+    //       alert("remove")
+    //       const msg =data.val();
+    //     // オブジェクトのkeyを取得
+    //     const key = data.key;
+
+    //     let h =  '<div class="template"><p class="name">';
+    //         h += msg.uname;
+    //         h += '</p><p class="text">';
+    //         h += msg.text;
+    //         h += '</p><button id="delete" class="';
+    //         h += key;
+    //         h += '">削除</button></div>';
+
+    //     // console.log(h);
+        
+    //     $("#output").append(h);
+    // })
+
+
+// 削除ボタンを押したときの処理
+    // 押されたボタンが属するli要素を削除する
+    $(document).on("click","#delete", function(){
+        
+    // 押されたボタンが属するli要素のvalueの値をkeyに格納
+       const key = $(this).parents("li").attr("value");
+
+    // firebaseRDBのkey以下の要素を削除する
+       remove(ref(db, "chat/" + key));
+
+    //押されたボタンが属するli要素を削除する
+       $(this).parents('li').remove();
+
+
+})
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/reset.css">
+
+<link rel="stylesheet" href="css/sample.css">
+
+<title>MIL(Majang I~~~ League)</title>
+</head>
+<body>
+
+<header>
+  <h1 class="title">MIL(Majang I~~~ League)</h1>
+</header>
+
+<main>
+
+
+</main>
+<footer class="title">MIL(Majang I~~~ League)</footer>
+
+<script>
+// ログイン中の場合の処理を書く
+if(localStorage.getItem("login") ){
+  alert("ログイン中のため、ゲーム画面に遷移します。");
+    console.log(localStorage.getItem("login"));
+
+    window.location.href = "./majang.html";
+    
+// 未ログインの場合の処理を書く
+}else{
+    
+
+    // ログインページに飛ばす
+    alert("未ログインのため、Login画面に遷移します。");
+    console.log(localStorage.getItem("login"));
+
+
+    window.location.href = "./login.html";
+};
+
+
+
+</script>
+</body>
+</html>
