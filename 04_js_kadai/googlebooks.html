@@ -14,7 +14,7 @@
     <p>
       <input type="text" id="keyword" >
       <button id="readbook" value="API">データ読み込み</button>
-      <!-- <button id="testbutton">テスト</button> -->
+      <button id="testbutton">テスト</button>
 
     </p>
   </header>
@@ -40,27 +40,27 @@
 // console.log(d);
 
 
-$("#readbook").on("click",function(){
+// $("#readbook").on("click",function(){
 
-  let url = `https://www.googleapis.com/books/v1/volumes?q=${$("#keyword").val()}`;
-  // let url1 = "https://www.googleapis.com/books/v1/volumes?q=jquery";
-  // let Qiita_url = `https://qiita.com/api/v2/items?q=${$("#keyword").val()}`;
+//   let url = `https://www.googleapis.com/books/v1/volumes?q=${$("#keyword").val()}`;
+//   // let url1 = "https://www.googleapis.com/books/v1/volumes?q=jquery";
+//   // let Qiita_url = `https://qiita.com/api/v2/items?q=${$("#keyword").val()}`;
 
-  $.get(url,function(data){
-  console.log(data);
-  console.log(data.items);
+//   $.get(url,function(data){
+//   console.log(data);
+//   console.log(data.items);
 
-  let content = "";
-  for(let i=0; i<data.items.length; i++){
-    console.log(data.items[i]);
+//   let content = "";
+//   for(let i=0; i<data.items.length; i++){
+//     console.log(data.items[i]);
 
-  content += `<ul><li>${data.items[i].volumeInfo.title}</li><li>${data.items[i].volumeInfo.publisher}</li></ul>`;  
-  }
-  $("#content").append(content);
+//   content += `<ul><li>${data.items[i].volumeInfo.title}</li><li>${data.items[i].volumeInfo.publisher}</li></ul>`;  
+//   }
+//   $("#content").append(content);
 
-  })
+//   })
 
-});
+// });
 
 
 
@@ -143,43 +143,46 @@ $("#readbook").on("click",function(){
 
 
 
-// // yahooテキスト解析を使ってみある
+// yahooテキスト解析を使ってみある
 
-// const request_URL = "https://jlp.yahooapis.jp/MAService/V1/parse";
+const request_URL = "https://jlp.yahooapis.jp/MAService/V1/parse";
 
-// // yahooクライアントID
-// const yahoo_appid = "dj00aiZpPThIQVBJNndrRmEyWCZzPWNvbnN1bWVyc2VjcmV0Jng9OGI-";
+// yahooクライアントID
+const yahoo_appid = "dj00aiZpPThIQVBJNndrRmEyWCZzPWNvbnN1bWVyc2VjcmV0Jng9OGI-";
 
-// const sentence  = "私は池辺です";
-// const results = "ma";
-
-
+const sentence  = "私は池辺です";
+const results = "ma";
 
 
-// $("#testbutton").on("click",function(){
-
-//   let url = "";
-//   url += `${request_URL}`;
-//   url += `?appid=${yahoo_appid}`;
-//   url += `?results=${results}`;
-//   // url += `?sentence=${sentence}`;
-
-//   console.log(url);
 
 
-//   $.get(url,function(data){
-//   console.log(data);
+$("#testbutton").on("click",function(){
 
-//   // let content = "";
-//   // for(let i=0; i<data.length; i++){
+  let url = "";
+  url += `${request_URL}`;
+  url += `&appid=${yahoo_appid}`;
+  url += `&results=${results}`;
+  // url += `?sentence=${sentence}`;
 
-//   // content += `<ul><li>${data[i].title}</li></ul>`;  
-//   // }
-//   // $("#content").append(content);
+  console.log(url);
 
-//   })
+  let sampleUrl =`https://jlp.yahooapis.jp/MAService/V1/parse?appid=${yahoo_appid}&results=ma,uniq&uniq_filter=9%7C10&sentence=%E5%BA%AD%E3%81%AB%E3%81%AF%E4%BA%8C%E7%BE%BD%E3%83%8B%E3%83%AF%E3%83%88%E3%83%AA%E3%81%8C%E3%81%84%E3%82%8B%E3%80%82`;
+  console.log(sampleUrl);
 
-// });
+
+  $.get(sampleUrl,function(data){
+  console.log(data);
+
+  // let content = "";
+  // for(let i=0; i<data.length; i++){
+
+  // content += `<ul><li>${data[i].title}</li></ul>`;  
+  // }
+  // $("#content").append(content);
+
+  })
+
+});
 
 
 
