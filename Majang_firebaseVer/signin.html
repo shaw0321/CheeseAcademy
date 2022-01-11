@@ -58,7 +58,7 @@
       
         // Your web app's Firebase configuration
         const firebaseConfig = {
-          apiKey: "",
+          apiKey: "AIzaSyAI3GUfkngW-pUkYydXpXqEgYs3MqxW__Q",
           authDomain: "gsapp-cb6e9.firebaseapp.com",
           projectId: "gsapp-cb6e9",
           storageBucket: "gsapp-cb6e9.appspot.com",
@@ -69,6 +69,10 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
+
+        console.log("hello");
+        console.log(db);
+
 
     
        
@@ -101,7 +105,8 @@ let user_list ={};
 
  onValue(ref(db, "user"),function(data){
 user_list = data.val();
-// console.log(user_list);
+console.log(user_list);
+alert("firebase works");
 // console.log(isExist(user_list,"username","id_test"));
 
 });
@@ -139,8 +144,11 @@ $("#signinbtn").on("click", function(){
 
         const dbRef_user = ref(db, "user");
         const newPostRef = push(dbRef_user);
+        console.log(newPostRef);
+
+
         set(newPostRef, profile);
-        window.location.href = "./signincomp.html";
+        // window.location.href = "./signincomp.html";
       
     }
 })

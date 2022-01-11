@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Sankey Diagram参照画面</title>
+
+        <!-- bootstrapの記述 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.88.1">
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/navbars/">
+
+        <!-- Bootstrap core CSS -->
+        <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+    
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+        </style>
+        <!-- Custom styles for this template -->
+        <link href="./css/navbar.css" rel="stylesheet">
+
+        <!-- Jqueryのインストール -->
+        <script src="js/jquery-2.1.3.min.js"></script>
+
+        <!-- google chart-->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <!-- google chart終了-->
+
+
+    </head>
+    <body>
+
+      <!-- ナビゲーション -->
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+          <a class="navbar-brand" href="./index.html">Sankey Diagram</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarsExample03">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" >username<span id="loginname"></span></a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" id="logoutbtn" >ログアウト</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown03">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-md-0">
+              <input class="form-control" type="text" placeholder="Search">
+            </form> -->
+          </div>
+      </nav>
+      <!-- ナビゲーション終了-->
+
+
+      <!-- ダイアグラム表示領域-->
+      <section class="container">
+          <div id="sankey_basic" class="w-100"></div>
+      </section>
+      <!-- ダイアグラム表示領域_終了-->
+
+      <!-- 保存領域-->
+      <section class="container">
+          <label for="inputTitle" class="sr-only">タイトル</label>
+          <input type="text" id="inputTitle" class="form-control " placeholder="タイトルを入力してください" >
+          <label for="inputExplanation" class="sr-only">説明</label>
+          <input type="text" id="inputExplanation" class="form-control" placeholder="ダイアグラムの説明を入力してください" >
+      </section>
+       <!-- 保存領域_終了-->      
+
+    
+      <!-- 入力領域-->
+      <section class="container w-100">
+
+          <div class="row">
+              <table class="table table-sm col">
+                  <thead class="thead-light">
+                      <tr>
+                        <th scope="col">No</th>
+                        <th scope="col">From</th>
+                        <th scope="col">To</th>
+                        <th scope="col">Value</th>
+                      </tr>
+                  </thead>
+                  <tbody id="rows">
+                      <!-- <tr id="inputRow">
+                          <th scope="row">1</th>
+                          <td><input type="text" name="data_value1" value="A"/></td>
+                          <td><input type="text" name="data_value2" value="D"/></td>
+                          <td><input type="text" name="data_value3" value=10 /></td>
+                          <td><button class="btn btn-sm btn-secondary" id="deletebtn">削除</button></td>
+                      </tr> -->
+
+                  </tbody>    
+              </table>
+
+
+          </div>
+          <!-- 入力領域_終了-->
+
+          <div class= "row">
+            <button class="btn btn-md btn-primary col-2" id="test" >test</button>
+          </div>
+      </section>
+
+ 
+  </body>
+  
+
+<script type="module">
+  
+
+  // ■ファイル読み込み時の処理を行う
+
+
+      // firebaseの記述
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.2/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved, onValue }
+          from "https://cdnjs.cloudflare.com/ajax/libs/firebase/9.6.2/firebase-database.min.js";
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "",
+        authDomain: "sankeydiagram-41542.firebaseapp.com",
+        databaseURL: "https://sankeydiagram-41542-default-rtdb.firebaseio.com",
+        projectId: "sankeydiagram-41542",
+        storageBucket: "sankeydiagram-41542.appspot.com",
+        messagingSenderId: "124476146008",
+        appId: "1:124476146008:web:670bbc5545dc882583a52d"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    //   console.log(app);
+
+      const db = getDatabase(app);
+    //   console.log(db);
+
+      const dbRefDiagrams = ref(db, "diagrams");
+      const dbRefUsers= ref(db, "users");
+
+      let readData =[];
+
+
+          //   LSからダイアグラムIDを取得する
+          if(localStorage.getItem("diagramId")){
+ 
+
+        // ダイアグラムリストからダイアグラムIDに一致するものを取得し変数に保存する
+        onValue(ref(db, "diagrams"),function(data){
+
+       // ダイアグラムIDをLSから取得し変数に保存する
+       let diagramKey = String(localStorage.getItem("diagramId")).trim();
+       console.log(diagramKey );
+
+        var dataDiagram = data.val();
+        console.log(dataDiagram[diagramKey] );
+
+
+        var readTitle = data.val()[diagramKey].title;
+        console.log(readTitle);
+        var readExplanation = data.val()[diagramKey].explanation;
+        console.log(readExplanation);
+        readData = data.val()[diagramKey].data;
+        console.log(readData);
+
+            // タイトルを表示
+            $("#inputTitle").val(readTitle);
+            // 説明を表示
+            $("#inputExplanation").val(readExplanation);
+ 
+            //sankey diagramの描画をする
+            google.charts.load('current', {'packages':['sankey']});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'From');
+            data.addColumn('string', 'To');
+            data.addColumn('number', 'Weight');
+            data.addRows(readData);
+
+            // Sets chart options.
+            var options = {
+                width: 600,
+            };
+
+            // Instantiates and draws our chart, passing in some options.
+            var chart = new google.visualization.Sankey(document.getElementById(`sankey_basic`));
+            // 'sankey_basic'
+            chart.draw(data, options);
+            }
+           // 表を表示
+              for(let i=0; i<= readData.length; i++){
+                let row =`<tr id="inputRow">
+                          <th scope="row">${i + 1}</th>
+                          <td><input type="text" name="data_value1" value=${readData[i][0]}></td>
+                          <td><input type="text" name="data_value2" value=${readData[i][1]}></td>
+                          <td><input type="text" name="data_value3" value=${readData[i][2]}></td> 
+                      </tr>`
+              $("#rows").append(row);
+            }
+        })  
+
+// 作成ボタンを押したときの処理
+$("#test").on("click",function(){
+
+  //sankey diagramの描画をする
+  google.charts.load('current', {'packages':['sankey']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'From');
+  data.addColumn('string', 'To');
+  data.addColumn('number', 'Weight');
+  data.addRows(readData);
+
+  // Sets chart options.
+  var options = {
+      width: 600,
+  };
+
+  // Instantiates and draws our chart, passing in some options.
+  var chart = new google.visualization.Sankey(document.getElementById(`sankey_basic`));
+  // 'sankey_basic'
+  chart.draw(data, options);
+  }
+});
+
+    // ダイアグラムIDがない場合Topページに戻る
+      }else{
+        window.location.href = "./index.html";
+      }
+
+
+
+      // // usernameをLSより取得し、ナビに記載
+      // if(localStorage.getItem("login")){
+      //   let username = localStorage.getItem("login");
+      //   $("#loginname").html("：" + localStorage.getItem("login"));
+      // console.log(localStorage.getItem("login"));
+
+      // }else{
+      //   let username = "guest";
+      //   $("#loginname").html("：" + username);
+      // console.log(localStorage.getItem("login"));
+      // }
+
+      // ログイン状態に応じた処理
+      // usernameをLSより取得し、ナビに記載
+      if(localStorage.getItem("login")){
+        let username = localStorage.getItem("login");
+        $("#loginname").html("：" + localStorage.getItem("login"));
+        console.log(localStorage.getItem("login"));
+        // ログアウトボタンをつける
+        var append =  `<li class="nav-item active"><a class="nav-link" id="logoutbtn" >ログアウト</a></li>`
+        $("#navAppend").append(append);
+
+      }else{
+        let username = "test";
+        $("#loginname").html("：" + "未ログイン");
+      console.log(localStorage.getItem("login"));
+        // ログインボタンをつける
+        var append =`<li class="nav-item active"><a class="nav-link" data-toggle="modal" data-target="#exampleModal" >ログイン</a></li>`
+        $("#navAppend").append(append);
+
+      }
+ 
+      // ログイン・サインイン用、ユーザーリストを取得
+        let user_list ={};
+        onValue(ref(db, "users"),function(data){
+        user_list = data.val();
+        // console.log(user_list);
+        });
+
+      
+// ■関数の記述を行う
+
+      // 対象のobjectの中に、target_key:target_valueの組み合わせが存在しているか
+      // 2階層限定
+      function isExist(object,target_key,target_value){
+          labelA:
+          for(var i = 0; i <1; i++){
+              for (var key in object ){
+                          // 既に同じIDが存在していた時
+                          if(object[key][target_key] == target_value ){ 
+                              return true;
+                              break labelA;
+                          }
+                      }
+                              return false;
+          }
+      }
+      
+      // 対象のobjectの中に、target_key:target_valueの組み合わせが存在しており、PWもあっているとき
+      // 2階層限定
+      function isMatch(object,target_key,target_value,target_key2,target_value2){
+          labelB:
+          for(var i = 0; i <1; i++){
+              for (var key in object ){
+                          // 既に同じIDが存在していた時
+                          if(object[key][target_key] == target_value ){ 
+      
+                              if(object[key][target_key2] == target_value2){
+                                  return true;
+                                  break labelB;
+                                }
+                          }
+                      }
+                              return false;
+          }
+      }
+
+  
+  // ■ユーザー操作に関する記述を行う
+// ログアウトして、ページに止まる
+  $(document).on("click","#logoutbtn", function(){
+        localStorage.setItem("login","");
+        alert("ログアウトしました、ダイアグラムの参照はそのままできます")
+
+      })
+
+
+    //   // 列作成ボタンを押したときの処理
+    //   $("#createRow").on("click",function(){
+    //       let row =`<tr id="inputRow"><th scope="row">${$("tbody").children().length + 1}</th><td><input type="text" name="data_value1" /></td><td><input type="text" name="data_value2" /></td><td><input type="text" name="data_value3" /></td><td><button class="btn btn-sm btn-primary" id="deletebtn">削除</button></td></tr>`;
+    //       $("#rows").append(row);
+  
+    //   });
+
+   
+
+</script>
+
+
+  <!-- bootstrapの記述 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="./assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</html>
