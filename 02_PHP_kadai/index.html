@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>PHPサインインテスト</title>
+
+        <!-- bootstrapの記述 -->
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.88.1">
+        <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/navbars/">
+
+        <!-- Bootstrap core CSS -->
+        <link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+          .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+          }
+    
+          @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+              font-size: 3.5rem;
+            }
+          }
+        </style>
+        <!-- Custom styles for this template -->
+        <link href="./css/navbar.css" rel="stylesheet">
+
+        <!-- Jqueryのインストール -->
+        <script src="js/jquery-2.1.3.min.js"></script>
+
+        <!-- google chart-->
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <!-- google chart終了-->
+
+
+    </head>
+    <body>
+
+      <!-- ナビゲーション -->
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+          <a class="navbar-brand" href="./index.html">Sankey Diagram</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarsExample03">
+            <ul class="navbar-nav mr-auto" id="navAppend">
+              <li class="nav-item active">
+                <a class="nav-link" >username<span id="loginname"></span></a>
+              </li>
+              <!-- <li class="nav-item active">
+                <a class="nav-link" id="logoutbtn" >ログアウト</a>
+              </li> -->
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled">Disabled</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown03" data-toggle="dropdown" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown03">
+                  <a class="dropdown-item" href="#">Action</a>
+                  <a class="dropdown-item" href="#">Another action</a>
+                  <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+              </li>
+            </ul>
+            <form class="form-inline my-2 my-md-0">
+              <input class="form-control" type="text" placeholder="Search">
+            </form> -->
+          </div>
+      </nav>
+      <!-- ナビゲーション終了-->
+
+
+
+    <!--ログイン・サインインモーダルウィンドウ -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      ログイン・サインイン
+    </button>
+
+    <!-- モーダルダイアログ -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">ダイアグラム作成のためには、ログインorサインインをして下さい</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <section class="container"> 
+              <div class="row">
+                  <div class="col border-right">
+                      <form class="form-signin">
+                          <img class="mb-4" src="./assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                          <h1 class="h3 mb-3 font-weight-normal">サインイン済みの方はこちらから</h1>
+                          <label for="loginUsername" class="sr-only">username</label>
+                          <input type="text" id="loginUsername" class="form-control" placeholder="username" >
+                          <label for="loginPassword" class="sr-only">Password</label>
+                          <input type="text" id="loginPassword" class="form-control" placeholder="Password" >
+                          <button class="btn btn-lg btn-primary btn-block"  id="loginbtn">ログイン</button>
+
+                        </form>
+
+                  </div>
+                  
+                  <!-- phpサインイン -->
+
+                  <div class="col">
+                      <form class="form-signin" method="post" action="http://localhost/PHP02_kadai/sighin.php">
+                          <img class="mb-4" src="./assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                          <h1 class="h3 mb-3 font-weight-normal">サインインはこちらから</h1>
+                          <label for="signinUsername" class="sr-only">username</label>
+                          <input type="text" id="signinUsername" class="form-control" placeholder="username" name="username">
+                          <label for="signinPassword" class="sr-only">Password</label>
+                          <input type="text" id="signinPassword" class="form-control" placeholder="Password" name="password">
+                          <label for="signinPasswordComfirm" class="sr-only">Password確認</label>
+                          <input type="text" id="signinPasswordComfirm" class="form-control" placeholder="Password確認" >
+                          <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinbtn">サインイン</button>
+                        </form>
+                  </div>
+                  <!-- firebaseサインイン -->
+                  <!-- <div class="col">
+                    <form class="form-signin">
+                        <img class="mb-4" src="./assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                        <h1 class="h3 mb-3 font-weight-normal">サインインはこちらから</h1>
+                        <label for="signinUsername" class="sr-only">username</label>
+                        <input type="text" id="signinUsername" class="form-control" placeholder="username" >
+                        <label for="signinPassword" class="sr-only">Password</label>
+                        <input type="text" id="signinPassword" class="form-control" placeholder="Password" >
+                        <label for="signinPasswordComfirm" class="sr-only">Password確認</label>
+                        <input type="text" id="signinPasswordComfirm" class="form-control" placeholder="Password確認" >
+                        <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinbtn">サインイン</button>
+                      </form>
+                </div> -->
+              </div>
+            </section>
+            ...
+          </div>
+
+          <div class="modal-footer">
+            <a  href="./index.html"><button type="button" class="btn btn-secondary" >ログインせずTopページに戻る</button></a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- モーダルダイアログ終了 -->   
+    <!--ログイン・サインインモーダルウィンドウ終了 -->
+    
+  </body>
+  
+
+<script type="module">
+  
+      // ログイン状態に応じた処理
+      // usernameをLSより取得し、ナビに記載
+      if(localStorage.getItem("login")){
+        let username = localStorage.getItem("login");
+        $("#loginname").html("：" + localStorage.getItem("login"));
+        console.log(localStorage.getItem("login"));
+        // ログアウトボタンをつける
+        var append =  `<li class="nav-item active"><a class="nav-link" id="logoutbtn" >ログアウト</a></li>`
+        $("#navAppend").append(append);
+
+      }else{
+       $("#exampleModal").modal('show');
+
+      }
+ 
+
+
+      
+// ■関数の記述を行う
+
+
+
+      // 対象のobjectの中に、target_key:target_valueの組み合わせが存在しているか
+      // 2階層限定
+      function isExist(object,target_key,target_value){
+          labelA:
+          for(var i = 0; i <1; i++){
+              for (var key in object ){
+                          // 既に同じIDが存在していた時
+                          if(object[key][target_key] == target_value ){ 
+                              return true;
+                              break labelA;
+                          }
+                      }
+                              return false;
+          }
+      }
+      
+      // 対象のobjectの中に、target_key:target_valueの組み合わせが存在しており、PWもあっているとき
+      // 2階層限定
+      function isMatch(object,target_key,target_value,target_key2,target_value2){
+          labelB:
+          for(var i = 0; i <1; i++){
+              for (var key in object ){
+                          // 既に同じIDが存在していた時
+                          if(object[key][target_key] == target_value ){ 
+      
+                              if(object[key][target_key2] == target_value2){
+                                  return true;
+                                  break labelB;
+                                }
+                          }
+                      }
+                              return false;
+          }
+      }
+
+  
+  // ■ユーザー操作に関する記述を行う
+
+      // ログインボタンを押した時の挙動を記載する
+      // loginボタンを押したときにLSに当該ID,PWの組み合わせがあるか確認する
+      $(document).on("click","#loginbtn", function(){
+
+      let loginUsername =String($("#loginUsername").val());
+      let loginPassword =$("#loginPassword").val();
+
+      // 当該IDが存在しない場合、「存在しないIDですと返す」
+      if(!isExist(user_list, "username", loginUsername)){
+          alert("存在しないIDです");
+          console.log(loginUsername);
+      }
+      // 当該IDが存在するがPWが間違っている場合、「PWが間違っています」と返す
+      else if(!isMatch(user_list, "username", loginUsername ,"password", loginPassword)){
+        alert("PWが間違っています。");     
+      }
+      // 当該IDが存在してPWもあっている場合、「ログインします」と返す
+      else{
+        alert("ログインします。");
+        // login中のid名をLSに保存する
+        localStorage.setItem("login", loginUsername);
+
+        // モーダルウィンドウを消す
+
+        };
+      })
+
+      // // サインインボタンを押したときの挙動を記載する
+      // $(document).on("click","#signinbtn", function(){
+      //   // 少なくとも一つの欄が空欄の場合、空欄の欄がありますと返す
+      //   if($("#signinUsername").val() == "" || $("#signinPassword").val() =="" || $("#signinPasswordComfirm").val() == "" ){
+      //       alert("入力されていない項目があります。")
+
+      //   // pwのvalueとpw_againのvalueの値が一致しない場合、
+      //   // パスワード欄とパスワード確認欄の値が異なりますと表示する。
+      //   }else if($("#signinPassword").val() !== $("#signinPasswordComfirm").val()){
+      //       alert("パスワード欄とパスワード確認欄の値が異なります");
+      //       console.log($("#signinPassword").val());
+      //       console.log($("#signinPasswordComfirm").val());
+
+      //   // 入力したidnameが存在する場合、「存在するIDです」と返す
+      //   }else if(isExist(user_list, "username", String($("#signinUsername").val()))){
+      //       alert("存在するIDです、ログインページからログインしてください");
+
+      //   // 入力したidnameが存在しない場合、「登録します」と返す
+      //   }else{
+      //       alert("登録します"+$("#signinUsername").val()+ $("#signinPassword").val() ); 
+      //       const profile= {
+      //                   username: $("#signinUsername").val(),
+      //                   password: $("#signinPassword").val() 
+      //               };
+
+
+      //       // firebaesに登録する
+      //       const newPostRef = push(dbRefUsers);
+      //       set(newPostRef, profile);
+
+      //       // login中のid名をLSに保存する
+      //       localStorage.setItem("login", $("#signinUsername").val());
+
+      //     // モーダルウィンドウを消す
+      //   }
+      // })
+
+      // ログアウトボタンに関する処理
+      // ログアウトボタンを押すと、LSのloginの値を空にして、ログインページに遷移する
+      $(document).on("click","#logoutbtn", function(){
+        localStorage.setItem("login","");
+        // window.location.href = "./index.html" ;
+      })
+          
+
+
+
+
+
+
+</script>
+
+
+  <!-- bootstrapの記述 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="./assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="./assets/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+</html>
+
