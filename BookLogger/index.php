@@ -1,3 +1,24 @@
+<?php
+//SESSIONスタート
+session_start();
+
+//関数を呼び出す
+require_once('funcs.php');
+
+//ログインチェック
+loginCheck();
+
+
+
+// 管理者の場合管理者ページへのリンクを表示する
+$adminNav = "";
+if ($_SESSION['kanri_flg'] == 1) {
+  $adminNav .= '"<li class="nav-item active"><a class="nav-link" href="admin2.php">管理者ページ</a></li>"';
+} 
+?>
+
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -45,7 +66,7 @@
   <header>
     <!-- ナビゲーション -->
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-      <a class="navbar-brand" href="./index.html">Book Logger</a>
+      <a class="navbar-brand" href="./">Book Logger</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample03" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -54,6 +75,10 @@
         <ul class="navbar-nav mr-auto" id="navAppend">
           <li class="nav-item active">
             <a class="nav-link" href="favlist.php">お気に入り一覧</a>
+          </li>
+          <?= $adminNav ?>
+          <li class="nav-item active">
+              <a class="nav-link" href="logout.php">ログアウト</a>
           </li>
         </ul>
 
@@ -76,7 +101,7 @@
    
           <div class="form-group">
             <label for="search"></label>
-            <input type="text" name="search" id="search" class="form-control" placeholder="put in words" aria-describedby="helpId">
+            <input type="text" name="search" id="search" class="form-control" placeholder="" aria-describedby="helpId">
             <small id="helpId" class="text-muted">１単語のみ入力してください</small>
             <input type="submit" id="searchbtn" value="検索">
           </div>
@@ -148,7 +173,8 @@
           },
           success : function(response) {
             console.log("ajax通信に成功しました");
-
+            $("#bookArea").empty();
+            $("#dialogArea").empty();
             let data = JSON.parse(response).items;
             for(let i=0; i< data.length; i++ ){
               // console.log(data[i].volumeInfo.title);

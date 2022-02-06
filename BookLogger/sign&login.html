@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Signin&Login</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/sign-in/">
+
+    
+
+    <!-- Bootstrap core CSS -->
+<link href="./assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="./css/signin.css" rel="stylesheet">
+
+
+    <!-- Jqueryのインストール -->
+    <script src="js/jquery-2.1.3.min.js"></script>
+  </head>
+  <body class="text-center">
+
+                <!-- サインイン＆ログイン -->
+                <section class="container"> 
+                  <div class="row">
+                      <div class="col ">
+                          <form class="form-signin" name="form1" action="login_act.php" method="post">
+                              <img class="mb-4" src="./assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                              <h1 class="h3 mb-3 font-weight-normal">事務局から連携されたログインIDとPWを入力</h1>
+                              <label for="loginUsername" class="sr-only">ユーザーID</label>
+                              <input type="text" id="loginUsername" class="form-control" placeholder="ユーザーID" name="lid">
+                              <label for="loginPassword" class="sr-only">パスワード</label>
+                              <input type="password" id="loginPassword" class="form-control" placeholder="パスワード" name="lpw">
+                              <button type="submit" class="btn btn-lg btn-primary btn-block" id="loginbtn" value="LOGIN">ログイン</button>
+
+                            </form>
+                      </div>
+                      <!-- <div class="col">
+                          <form class="form-signin">
+                              <img class="mb-4" src="./assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+                              <h1 class="h3 mb-3 font-weight-normal">サインインはこちらから</h1>
+                              <label for="signinUsername" class="sr-only">username</label>
+                              <input type="text" id="signinUsername" class="form-control" placeholder="username" >
+                              <label for="signinPassword" class="sr-only">Password</label>
+                              <input type="text" id="signinPassword" class="form-control" placeholder="Password" >
+                              <label for="signinPasswordComfirm" class="sr-only">Password確認</label>
+                              <input type="text" id="signinPasswordComfirm" class="form-control" placeholder="Password確認" >
+                              <button class="btn btn-lg btn-primary btn-block" type="submit" id="signinbtn">サインイン</button>
+                            </form>
+                      </div> -->
+                  </div>
+                </section>
+                <!-- サインイン＆ログイン終了 -->
+
+    <script type="module">
+// 画面を開いたときの処理を記載する
+
+  // ページを読み込んだときの処理を記載する
+
+// 関数を定義する
+     
+
+ 
+// ユーザー操作に関する処理
+
+// ログインボタンを押した時の挙動を記載する
+// loginボタンを押したときにLSに当該ID,PWの組み合わせがあるか確認する
+$("#loginbtn").on("click", function(){
+
+let loginUsername =String($("#loginUsername").val());
+let loginPassword =$("#loginPassword").val();
+
+// 当該IDが存在しない場合、「存在しないIDですと返す」
+if(!isExist(user_list, "username", loginUsername)){
+    alert("存在しないIDです");
+    console.log(loginUsername);
+}
+// 当該IDが存在するがPWが間違っている場合、「PWが間違っています」と返す
+else if(!isMatch(user_list, "username", loginUsername ,"password", loginPassword)){
+  alert("PWが間違っています。");     
+}
+// 当該IDが存在してPWもあっている場合、「ログインします」と返す
+else{
+  alert("ログインします。");
+  // login中のid名をLSに保存する
+  localStorage.setItem("login", loginUsername);
+
+  // モーダルウィンドウを消す
+
+  };
+})
+
+// サインインボタンを押したときの挙動を記載する
+$("#signinbtn").on("click", function(){
+  // 少なくとも一つの欄が空欄の場合、空欄の欄がありますと返す
+  if($("#signinUsername").val() == "" || $("#signinPassword").val() =="" || $("#signinPasswordComfirm").val() == "" ){
+      alert("入力されていない項目があります。")
+
+  // pwのvalueとpw_againのvalueの値が一致しない場合、
+  // パスワード欄とパスワード確認欄の値が異なりますと表示する。
+  }else if($("#signinPassword").val() !== $("#signinPasswordComfirm").val()){
+      alert("パスワード欄とパスワード確認欄の値が異なります");
+      console.log($("#signinPassword").val());
+      console.log($("#signinPasswordComfirm").val());
+
+  // 入力したidnameが存在する場合、「存在するIDです」と返す
+  }else if(isExist(user_list, "username", String($("#signinUsername").val()))){
+      alert("存在するIDです、ログインページからログインしてください");
+
+  // 入力したidnameが存在しない場合、「登録します」と返す
+  }else{
+      alert("登録します"+$("#signinUsername").val()+ $("#signinPassword").val() ); 
+      const profile= {
+                  username: $("#signinUsername").val(),
+                  password: $("#signinPassword").val() 
+              };
+
+
+      // firebaesに登録する
+      const newPostRef = push(dbRefUsers);
+      set(newPostRef, profile);
+
+      // login中のid名をLSに保存する
+      localStorage.setItem("login", $("#signinUsername").val());
+
+    // モーダルウィンドウを消す
+  }
+})
+      
+ </script>
+
+</section>
+    
+</body>
+</html>
